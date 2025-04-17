@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { JsonPipe, NgForOf, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { UrlConcurrentFetchService } from './services/url-concurrent-fetch.service';
 import { MatFormField, MatLabel, MatOption, MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule, MatButton, NgIf, NgForOf, JsonPipe, MatSelect, MatLabel, MatOption, MatFormField],
+  imports: [RouterOutlet, FormsModule, MatButton, JsonPipe, MatSelect, MatLabel, MatOption, MatFormField],
   templateUrl: './app.component.html',
   standalone: true,
   styleUrl: './app.component.scss'

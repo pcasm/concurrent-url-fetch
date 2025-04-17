@@ -5,30 +5,33 @@
       <h4>Ready to fetch URLs concurrently for you! 🎉</h4>
       <div>
         <mat-form-field>
-        <mat-label>Max concurrency</mat-label>
-        <mat-select [(value)]="maxConcurrency">
-          <mat-option value='1'>1</mat-option>
-          <mat-option value='2'>2</mat-option>
-          <mat-option value='3'>3</mat-option>
-          <mat-option value='4'>4</mat-option>
-          <mat-option value='5'>5</mat-option>
-          <mat-option value='6'>6</mat-option>
-        </mat-select>
-      </mat-form-field>
+          <mat-label>Max concurrency</mat-label>
+          <mat-select [(value)]="maxConcurrency">
+            <mat-option value='1'>1</mat-option>
+            <mat-option value='2'>2</mat-option>
+            <mat-option value='3'>3</mat-option>
+            <mat-option value='4'>4</mat-option>
+            <mat-option value='5'>5</mat-option>
+            <mat-option value='6'>6</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div>
         <button mat-button [disabled]="loading" (click)="fetch()">Fetch URLs!</button>
-        <button mat-button *ngIf="(res.length && !loading) || error" (click)=resetFlags()>Clear</button>
+        @if ((res.length && !loading) || error) {
+          <button mat-button (click)=resetFlags()>Clear</button>}
       </div>
-      <p *ngIf="loading">Loading...</p>
-      <p *ngIf="error" class="error">{{ error }}</p>
-
-      <div *ngIf="res.length && !loading">
-          <p *ngFor="let res of res">
-            {{ res | json }}
-          </p>
+      <div>
+        @if (loading) {
+          <p>Loading...</p>
+        } @else if (res.length) {
+            @for (item of res; track $index) {
+              <p>{{item | json}}</p>
+          }
+        } @else if (error) {
+            <p class="error">{{error}}</p>
+        }
       </div>
-
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
